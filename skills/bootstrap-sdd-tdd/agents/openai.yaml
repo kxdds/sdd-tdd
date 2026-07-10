@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bootstrap SDD-TDD (universal)"
+  short_description: "Set up or clean the OpenSpec + Superpowers TDD workflow in any agent tool."
+  default_prompt: "Use $bootstrap-sdd-tdd setup to check dependencies and set up the sdd-tdd workflow, or $bootstrap-sdd-tdd clean to remove it."
