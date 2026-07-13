@@ -82,6 +82,7 @@ skills/
 Copy the `skills/` folders into your project's skills directory:
 
 ```bash
+# macOS / Linux
 git clone --depth 1 https://github.com/kxdds/sdd-tdd.git
 # Pick the directory your agent reads:
 #   Cursor:       .cursor/skills/
@@ -91,6 +92,12 @@ git clone --depth 1 https://github.com/kxdds/sdd-tdd.git
 #   Gemini CLI:   .gemini/skills/
 #   Universal:    .agents/skills/
 cp -r sdd-tdd/skills/* <your-project>/.agents/skills/
+```
+
+```powershell
+# Windows PowerShell
+git clone --depth 1 https://github.com/kxdds/sdd-tdd.git
+Copy-Item -Recurse sdd-tdd\skills\* <your-project>\.agents\skills\
 ```
 
 ### 2. Bootstrap your project

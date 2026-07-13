@@ -73,6 +73,7 @@ skills/
 把 `skills/` 下的目录复制到你项目的 skills 目录：
 
 ```bash
+# macOS / Linux
 git clone --depth 1 https://github.com/kxdds/sdd-tdd.git
 # 按你的智能体选择目录：
 #   Cursor:       .cursor/skills/
@@ -82,6 +83,12 @@ git clone --depth 1 https://github.com/kxdds/sdd-tdd.git
 #   Gemini CLI:   .gemini/skills/
 #   通用:         .agents/skills/
 cp -r sdd-tdd/skills/* <你的项目>/.agents/skills/
+```
+
+```powershell
+# Windows PowerShell
+git clone --depth 1 https://github.com/kxdds/sdd-tdd.git
+Copy-Item -Recurse sdd-tdd\skills\* <你的项目>\.agents\skills\
 ```
 
 ### 2. 初始化项目

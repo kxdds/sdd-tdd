@@ -1,6 +1,6 @@
 ---
 name: bootstrap-sdd-tdd
-description: Use when a project needs the OpenSpec + Superpowers sdd-tdd (spec-to-plan-to-TDD) workflow checked, installed, and configured — or cleanly removed — in any coding agent (Codex, Claude Code, Cursor, Antigravity, OpenCode, Gemini CLI, Copilot CLI, or others).
+description: Use when a project needs the OpenSpec + Superpowers sdd-tdd (spec-to-plan-to-TDD) workflow checked, installed, and configured -- or cleanly removed -- in any coding agent (Codex, Claude Code, Cursor, Antigravity, OpenCode, Gemini CLI, Copilot CLI, or others).
 ---
 
 # Bootstrap SDD-TDD (universal)
@@ -22,7 +22,7 @@ Determine which agent tool you are running inside. Use, in order:
 
 Then resolve two lookups from the tables below: (a) where the bridge skill goes, (b) how Superpowers is installed.
 
-### Table A — bridge skill target directory
+### Table A -- bridge skill target directory
 
 Rule: if the host tool has its own project-local skills directory, use it; otherwise use the cross-tool generic `.agents/skills/`.
 
@@ -36,7 +36,7 @@ Rule: if the host tool has its own project-local skills directory, use it; other
 | Gemini CLI | `.gemini/skills/openspec-superpowers/SKILL.md` | none |
 | Unknown / other | `.agents/skills/openspec-superpowers/SKILL.md` | Ensure root `AGENTS.md` mentions the skill |
 
-### Table B — how to get Superpowers
+### Table B -- how to get Superpowers
 
 Rule: if the host tool has a plugin/extension/marketplace system, install Superpowers through it; if it has none, fall back to vendoring the official repo into the project.
 
@@ -95,20 +95,22 @@ Use the current project root. Do not create a business change. Use your tool's s
 
 1. If the project has no initialized OpenSpec workspace (missing `openspec/` directory, or it lacks the `openspec/specs/` and `openspec/changes/` structure that `openspec init` creates), run `openspec init --tools <tool>` non-interactively, mapping the host tool from Step 0 to an id from `openspec init --help` (e.g. `cursor`, `claude`, `codex`, `opencode`, `gemini`, `antigravity`); use `--tools none` when unsure. Never re-init an already initialized workspace.
 2. If `openspec/schemas/sdd-tdd/` is missing, run `openspec schema fork spec-driven sdd-tdd`.
-3. In `schema.yaml`, set the schema `description` to reflect the real workflow, e.g. `SDD-TDD workflow - proposal → specs → design → tasks → implementation-plan, executed with Superpowers TDD`. Do not leave the forked default description in place.
-4. Extend `schema.yaml` with an `implementation-plan` artifact that depends on `tasks`, writes `implementation-plan.md`, and becomes the sole `apply.requires` entry, with `tracks: tasks.md` preserved. Its `instruction` must embed the writing-plans quality bar verbatim, because artifacts are often generated through OpenSpec's own commands (`/opsx:ff`, `/opsx:continue`) where no Superpowers skill is active — the schema instruction and the template are the only guaranteed carriers of the standard. Include at least: "Write for an engineer with zero context who cannot ask questions. Every step contains complete copy-pasteable code (never a description of code), exact file paths, the RED command with its exact expected failure, and the GREEN command. Read the actual codebase before planning; record build/test commands and conventions in the plan. Steps consisting of prose like 'add validation logic' are incomplete — rewrite them with the actual code."
-5. In the `design` artifact instruction, add: for small changes, write a minimal design (Context plus one Decision) rather than skipping it — `tasks` depends on `design`, so it must exist.
-6. Install the `implementation-plan.md` template by copying `templates/implementation-plan.md` (bundled next to this SKILL.md) verbatim into `openspec/schemas/sdd-tdd/templates/`. Do not write the template from memory or summarize it — the embedded generation rules and per-step structure are the mechanism that forces detailed plans. If the bundled file is missing, fetch it from `https://raw.githubusercontent.com/kxdds/sdd-tdd/main/skills/bootstrap-sdd-tdd/templates/implementation-plan.md`.
+3. In `schema.yaml`, set the schema `description` to reflect the real workflow, e.g. `SDD-TDD workflow - proposal -> specs -> design -> tasks -> implementation-plan, executed with Superpowers TDD`. Do not leave the forked default description in place.
+4. Extend `schema.yaml` with an `implementation-plan` artifact that depends on `tasks`, writes `implementation-plan.md`, and becomes the sole `apply.requires` entry, with `tracks: tasks.md` preserved. Its `instruction` must embed the writing-plans quality bar verbatim, because artifacts are often generated through OpenSpec's own commands (`/opsx:ff`, `/opsx:continue`) where no Superpowers skill is active -- the schema instruction and the template are the only guaranteed carriers of the standard. Include at least: "Write for an engineer with zero context who cannot ask questions. Every step contains complete copy-pasteable code (never a description of code), exact file paths, the RED command with its exact expected failure, and the GREEN command. Read the actual codebase before planning; record build/test commands and conventions in the plan. Steps consisting of prose like 'add validation logic' are incomplete -- rewrite them with the actual code."
+5. In the `design` artifact instruction, add: for small changes, write a minimal design (Context plus one Decision) rather than skipping it -- `tasks` depends on `design`, so it must exist.
+6. Install the `implementation-plan.md` template by copying `templates/implementation-plan.md` (bundled next to this SKILL.md) verbatim into `openspec/schemas/sdd-tdd/templates/`. Do not write the template from memory or summarize it -- the embedded generation rules and per-step structure are the mechanism that forces detailed plans. If the bundled file is missing, fetch it from `https://raw.githubusercontent.com/kxdds/sdd-tdd/main/skills/bootstrap-sdd-tdd/templates/implementation-plan.md`.
 7. Set `schema: sdd-tdd` in `openspec/config.yaml`, preserving any existing context and rules.
 
 Preserve an existing valid `sdd-tdd` schema; repair only what is missing or incompatible.
 
+Portability rule: everything written into `schema.yaml` (descriptions, instructions) and templates must use ASCII-only punctuation (`->` not arrows, `--` not em-dashes). These strings are echoed by the OpenSpec CLI, and Windows consoles with legacy code pages garble multi-byte punctuation into `?` sequences.
+
 ### Step 4: Generate the bridge skill
 
-Install the `openspec-superpowers` skill at the location resolved from Table A, if absent. Prefer copying the canonical `skills/openspec-superpowers/SKILL.md` bundled in this repo (or fetch it from `https://raw.githubusercontent.com/kxdds/sdd-tdd/main/skills/openspec-superpowers/SKILL.md`) verbatim — do not regenerate it from this summary, which omits the quality bars. Only if neither source is reachable, write it from scratch with `plan`, `run`, `verify`, and `archive` modes:
+Install the `openspec-superpowers` skill at the location resolved from Table A, if absent. Prefer copying the canonical `skills/openspec-superpowers/SKILL.md` bundled in this repo (or fetch it from `https://raw.githubusercontent.com/kxdds/sdd-tdd/main/skills/openspec-superpowers/SKILL.md`) verbatim -- do not regenerate it from this summary, which omits the quality bars. Only if neither source is reachable, write it from scratch with `plan`, `run`, `verify`, and `archive` modes:
 
-- `plan`: use `superpowers:writing-plans` to create the `implementation-plan.md` artifact from the schema template. Investigate the codebase first; every step must contain complete copy-pasteable code, exact paths, and RED/GREEN commands with expected outcomes — executable by a zero-context engineer. Map every unchecked OpenSpec task ID to exactly one plan step. Do not check off `tasks.md` during planning.
-- `run`: use `superpowers:test-driven-development` for each mapped task — one focused failing test, observe RED, minimal implementation, observe GREEN, refactor while green — then mark the plan step and the corresponding OpenSpec checkbox complete. Run project checks and OpenSpec verification. Stop before archive.
+- `plan`: use `superpowers:writing-plans` to create the `implementation-plan.md` artifact from the schema template. Investigate the codebase first; every step must contain complete copy-pasteable code, exact paths, and RED/GREEN commands with expected outcomes -- executable by a zero-context engineer. Map every unchecked OpenSpec task ID to exactly one plan step. Do not check off `tasks.md` during planning.
+- `run`: use `superpowers:test-driven-development` for each mapped task -- one focused failing test, observe RED, minimal implementation, observe GREEN, refactor while green -- then mark the plan step and the corresponding OpenSpec checkbox complete. Run project checks and OpenSpec verification. Stop before archive.
 - `verify`: resolve actionable verification failures before reporting readiness.
 - `archive`: use OpenSpec sync and archive only after all tasks and verification are clean. Archive stays an explicit user action.
 
@@ -127,11 +129,11 @@ Per-tool packaging from Table A:
   ```markdown
   <!-- bootstrap-sdd-tdd:begin -->
   ## SDD-TDD workflow
-  Use [openspec-superpowers](.agents/skills/openspec-superpowers/SKILL.md): propose → plan → run → verify → archive (archive is an explicit user action).
+  Use [openspec-superpowers](.agents/skills/openspec-superpowers/SKILL.md): propose -> plan -> run -> verify -> archive (archive is an explicit user action).
   <!-- bootstrap-sdd-tdd:end -->
   ```
 
-- Keep the block minimal — one heading, a few lines at most. Do not duplicate the bridge skill's documentation into `AGENTS.md`.
+- Keep the block minimal -- one heading, a few lines at most. Do not duplicate the bridge skill's documentation into `AGENTS.md`.
 - If a `bootstrap-sdd-tdd:begin`/`end` block already exists, update the content inside it instead of appending a second block.
 - If the file does not exist, create it containing only the marker block.
 
@@ -149,7 +151,7 @@ openspec templates --schema sdd-tdd --json
 
 Validate created skills with the host tool's skill validator when one exists. Run the repository's lint, typecheck, and tests when scripts exist. Report changed files, validation evidence, how to invoke the workflow, and remaining risks.
 
-Recommend as a closing note: exercise the full loop once on a deliberately small change (propose → plan → run → verify → archive) before relying on it for real work.
+Recommend as a closing note: exercise the full loop once on a deliberately small change (propose -> plan -> run -> verify -> archive) before relying on it for real work.
 
 ### Invocation after setup
 
@@ -171,17 +173,17 @@ First enumerate exactly what will be deleted (only items that actually exist), s
 
 Deletion checklist:
 
-1. `openspec/schemas/sdd-tdd/` — the entire forked schema directory.
+1. `openspec/schemas/sdd-tdd/` -- the entire forked schema directory.
 2. In `openspec/config.yaml`, remove the `schema: sdd-tdd` line so OpenSpec falls back to the default `spec-driven` orchestration. Preserve user-authored `context` and `rules`.
 3. The `openspec-superpowers` bridge skill in every tool directory where it exists: `.codex/skills/openspec-superpowers/`, `.claude/skills/openspec-superpowers/`, `.cursor/skills/openspec-superpowers/`, `.agents/skills/openspec-superpowers/`, `.opencode/skills/openspec-superpowers/`, `.gemini/skills/openspec-superpowers/`.
-4. In the project root `AGENTS.md`, remove only the `<!-- bootstrap-sdd-tdd:begin -->` … `<!-- bootstrap-sdd-tdd:end -->` block. Never touch content outside the markers. If older setups added unmarked references to these skills, remove only those specific lines and leave everything else intact. Delete the file only if it becomes empty and was created by setup.
-5. Superpowers skill folders that setup vendored into the project via the no-plugin-system fallback (copies under `.agents/skills/` originating from the Superpowers repo). Do not touch Superpowers installed through a plugin/extension system — that stays.
+4. In the project root `AGENTS.md`, remove only the `<!-- bootstrap-sdd-tdd:begin -->` ... `<!-- bootstrap-sdd-tdd:end -->` block. Never touch content outside the markers. If older setups added unmarked references to these skills, remove only those specific lines and leave everything else intact. Delete the file only if it becomes empty and was created by setup.
+5. Superpowers skill folders that setup vendored into the project via the no-plugin-system fallback (copies under `.agents/skills/` originating from the Superpowers repo). Do not touch Superpowers installed through a plugin/extension system -- that stays.
 
 Keep (never delete during a normal clean):
 
-- The initialized OpenSpec workspace itself (`openspec/specs/`, `openspec/changes/`, `openspec/config.yaml` created by `openspec init`) — clean restores the default orchestration; it does not de-initialize OpenSpec.
-- `openspec/changes/` and `openspec/changes/archive/` — user work product, including any `implementation-plan.md` inside them. Delete these only when the user explicitly runs `clean --purge`, and only after a second, separate confirmation.
-- OpenSpec's own generated integrations (`.cursor/commands/opsx-*`, per-tool `openspec-*` skills) — they belong to the default orchestration and are still needed after clean.
+- The initialized OpenSpec workspace itself (`openspec/specs/`, `openspec/changes/`, `openspec/config.yaml` created by `openspec init`) -- clean restores the default orchestration; it does not de-initialize OpenSpec.
+- `openspec/changes/` and `openspec/changes/archive/` -- user work product, including any `implementation-plan.md` inside them. Delete these only when the user explicitly runs `clean --purge`, and only after a second, separate confirmation.
+- OpenSpec's own generated integrations (`.cursor/commands/opsx-*`, per-tool `openspec-*` skills) -- they belong to the default orchestration and are still needed after clean.
 - The OpenSpec CLI, the Superpowers plugin/extension, and this `bootstrap-sdd-tdd` skill.
 
 After deleting, verify: run `openspec schemas --json` and confirm `sdd-tdd` no longer appears and the default schema is available. Report the exact list of deleted paths and anything that was kept.
