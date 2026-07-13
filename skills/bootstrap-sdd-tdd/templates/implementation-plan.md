@@ -1,11 +1,11 @@
 <!--
-GENERATION RULES — read all of this before writing, then DELETE this comment block.
+GENERATION RULES -- read all of this before writing, then DELETE this comment block.
 
 QUALITY BAR (superpowers:writing-plans): every step must be executable by an
 engineer who has ZERO context for this codebase and cannot ask questions.
 That means:
 
-- COMPLETE, copy-pasteable code in every step — never a description of code.
+- COMPLETE, copy-pasteable code in every step -- never a description of code.
   "Add validation logic to the service" is NOT a plan step. The actual method
   body is.
 - No placeholders. `// TODO`, `// implement here`, `...` and "similar to the
@@ -26,10 +26,10 @@ summary-level plan. If your draft has steps under ~30 lines, they are almost
 certainly descriptions, not implementations. Rewrite them before saving.
 -->
 
-# Implementation Plan — [change-name]
+# Implementation Plan -- [change-name]
 
-**Tracks:** `tasks.md` — every unchecked task ID appears in exactly one step.
-**Execution:** `openspec-superpowers run [change-name]` (strict TDD: RED → GREEN → refactor per step).
+**Tracks:** `tasks.md` -- every unchecked task ID appears in exactly one step.
+**Execution:** `openspec-superpowers run [change-name]` (strict TDD: RED -> GREEN -> refactor per step).
 
 ## Context
 
@@ -61,27 +61,27 @@ An executor reads this once instead of rediscovering it per step. Include at lea
 **Test (RED):**
 
 ```[lang]
-[COMPLETE test code — imports, class, setup, one focused assertion. Copy-pasteable as-is.]
+[COMPLETE test code -- imports, class, setup, one focused assertion. Copy-pasteable as-is.]
 ```
 
 Run: `[exact command scoped to this test]`
-Expected failure: `[exact expected error — e.g. "NoSuchBeanDefinitionException: FooService" or "expected 429 but was 200"]`
+Expected failure: `[exact expected error -- e.g. "NoSuchBeanDefinitionException: FooService" or "expected 429 but was 200"]`
 
 **Implementation (GREEN):**
 
 ```[lang]
-[COMPLETE implementation code — the minimal change that makes the test pass. Copy-pasteable as-is.]
+[COMPLETE implementation code -- the minimal change that makes the test pass. Copy-pasteable as-is.]
 ```
 
-Run: `[same command]` → expect pass.
+Run: `[same command]` -> expect pass.
 
-**Verify:** `[project-wide check command(s) — lint / typecheck / affected-module tests]`
+**Verify:** `[project-wide check command(s) -- lint / typecheck / affected-module tests]`
 
 **Commit:** `git add -A && git commit -m "[type]: [what this step did]"`
 
 ---
 
-### Step 2: …
+### Step 2: ...
 
 ## Final verification
 
